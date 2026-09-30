@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <!-- 禁止加载任何远程资源（SKILL §8 / TECH_DESIGN §24）；img 仅本地 file 资产帧 -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' file:" />
+  <title>DinoPet</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- T101：页面背景必须完全透明，无黑色/白色底 -->
+  <div id="stage">
+    <canvas id="dino-canvas"></canvas>
+    <!-- Phase 2 动画 HUD：Anim/Frame/FPS/Dir（03 接入文档第八阶段调试页要求） -->
+    <div id="anim-hud" class="hidden"></div>
+    <!-- SKILL §30 调试浮层：仅 dev 显示 -->
+    <div id="debug-overlay" class="hidden"></div>
+  </div>
+  <!-- 资产调试面板：仅 dev（--dev 加宽窗口），按钮播放各动画 + 方向翻转 + 移动控制 -->
+  <div id="debug-panel" class="hidden">
+    <div id="anim-buttons"></div>
+    <div id="control-buttons">
+      <button id="btn-direction" type="button">Dir: Left</button>
+      <button id="btn-move" type="button">Move: On</button>
+      <button id="btn-mode" type="button">Mode: CW</button>
+    </div>
+  </div>
+  <!-- 致命错误提示（默认隐藏） -->
+  <div id="fatal-error" class="hidden"></div>
+  <script type="module" src="../../dist/renderer/app.js"></script>
+</body>
+</html>

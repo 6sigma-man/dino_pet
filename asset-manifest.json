@@ -1,0 +1,69 @@
+{
+  "version": "1.0",
+  "canvas": {
+    "width": 256,
+    "height": 256,
+    "format": "PNG",
+    "colorMode": "RGBA",
+    "background": "transparent",
+    "baselineY": 214
+  },
+  "directionStrategy": {
+    "authored": "right",
+    "left": "horizontal-flip"
+  },
+  "animations": {
+    "idle": {
+      "frames": 6,
+      "fps": 8,
+      "loop": true
+    },
+    "walk": {
+      "frames": 8,
+      "fps": 10,
+      "loop": true
+    },
+    "run": {
+      "frames": 8,
+      "fps": 14,
+      "loop": true
+    },
+    "turn": {
+      "frames": 5,
+      "fps": 10,
+      "loop": false
+    },
+    "fire": {
+      "frames": 10,
+      "fps": 12,
+      "loop": false,
+      "criticalAcceptance": "mouth opens/closes; flame origin is inside oral cavity"
+    },
+    "water": {
+      "frames": 10,
+      "fps": 12,
+      "loop": false,
+      "criticalAcceptance": "mouth opens/closes; water origin is inside oral cavity"
+    },
+    "tail": {
+      "frames": 8,
+      "fps": 10,
+      "loop": false
+    },
+    "jump": {
+      "frames": 8,
+      "fps": 12,
+      "loop": false
+    },
+    "sleep": {
+      "frames": 6,
+      "fps": 5,
+      "loop": true
+    },
+    "reaction": {
+      "frames": 8,
+      "fps": 12,
+      "loop": false
+    }
+  }
+}

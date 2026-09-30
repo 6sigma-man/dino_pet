@@ -1,0 +1,125 @@
+/* Phase 1/2：透明窗口样式。html/body 必须无背景色，否则透明失效出现黑/白底。 */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+  overflow: hidden;
+  user-select: none;
+  font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+/* 宠物绘制区：始终 128×128 左上角（正式模式 = 整窗） */
+#stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 128px;
+  height: 128px;
+}
+
+#dino-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#fatal-error {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  right: 4px;
+  font-size: 11px;
+  color: #b71c1c;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 4px;
+  padding: 4px 6px;
+}
+
+/* SKILL §30 DEBUG_OVERLAY：Mode/Win/WorkArea/DPR，仅开发模式 */
+#debug-overlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-size: 9px;
+  line-height: 1.3;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 3px;
+  padding: 2px 4px;
+  pointer-events: none;
+  white-space: pre;
+}
+
+/* Phase 2 动画 HUD：Anim/Frame/FPS/Dir */
+#anim-hud {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 9px;
+  line-height: 1.3;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 3px;
+  padding: 2px 4px;
+  pointer-events: none;
+  white-space: pre;
+}
+
+/* 资产调试面板（03 接入文档第八阶段）：仅 dev，位于宠物窗右侧 */
+#debug-panel {
+  position: absolute;
+  left: 132px;
+  top: 0;
+  width: 236px;
+  height: 128px;
+  background: rgba(20, 20, 20, 0.78);
+  border-radius: 6px;
+  padding: 4px 6px;
+  box-sizing: border-box;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+#anim-buttons {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+
+/* Phase 3 控制行：Dir / Move / Mode 三钮并排 */
+#control-buttons {
+  display: flex;
+  gap: 3px;
+  margin-top: 3px;
+}
+
+#control-buttons button {
+  flex: 1;
+}
+
+#debug-panel button {
+  font-size: 9px;
+  padding: 2px 0;
+  border: none;
+  border-radius: 3px;
+  background: #3a3a3a;
+  color: #fff;
+  cursor: pointer;
+}
+
+#debug-panel button:hover {
+  background: #555;
+}
+
+#debug-panel button.active {
+  background: #2e7d32;
+}

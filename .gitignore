@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-unittest/
+out/
+release/
+
+# Electron / packaging
+*.asar
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Config cache (user runtime config is stored in userData, not repo)
+.config-cache/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# 截图取证中间帧（全屏、含桌面隐私）——只保留精选特写（如 screenshots/dino-on-desktop.png）入库
+screenshots/raw/
+screenshots/_probe.png
+screenshots/capture-*.png

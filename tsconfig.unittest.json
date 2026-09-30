@@ -1,0 +1,25 @@
+{
+  "comment": "纯逻辑 renderer 模块（animation/ 与 state/ 目录零 DOM 依赖）编译为 CJS，供 node --test 直接 require 单测",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "lib": ["ES2022"],
+    "outDir": "dist-unittest",
+    "rootDir": "src/renderer",
+    "strict": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "sourceMap": false
+  },
+  "include": [
+    "src/renderer/i18n.ts",
+    "src/renderer/animation/**/*.ts",
+    "src/renderer/state/**/*.ts",
+    "src/renderer/effect/EffectManifest.ts",
+    "src/renderer/effect/EffectEngine.ts"
+  ]
+}

@@ -1,0 +1,46 @@
+# electron-builder 配置（Phase 13 T1302）：生成 Windows 构建产物。
+# asar:false —— 让打包后目录布局（dist/ + src/renderer/ + assets/ + effects/）与当前
+# 可正常运行的 `electron .` 完全一致；主进程 loadFile 相对路径、nativeImage 读托盘图标
+# 均依赖真实文件路径，禁用 asar 可避免 asar 内 nativeImage/相对 file:// 定位不稳的问题。
+appId: com.dinopet.app
+productName: DinoPet
+copyright: Copyright © 2026 DinoPet Contributors
+
+directories:
+  output: release        # 产物输出目录
+  buildResources: build  # 图标等资源目录（build/icon.png 256×256 复用官方 idle/01 帧，electron-builder 自动转多尺寸 .ico）
+
+# 仅打包运行所需文件（含④引入的首个运行时原生依赖 uiohook-napi 及其加载器）
+files:
+  - "dist/**/*"          # 主进程/preload/shared + renderer 编译产物（package.json main 入口）
+  - "src/renderer/**/*"  # index.html / styles.css / settings.html / sun-marker.html（主进程按相对路径 loadFile）
+  - "assets/**/*"        # 角色动画帧（renderer file:// 相对根目录 + 托盘图标）
+  - "effects/**/*"       # 特效装饰帧
+  - "node_modules/uiohook-napi/**"   # 全局鼠标钩子原生依赖（prebuildify N-API 二进制）
+  - "node_modules/node-gyp-build/**" # uiohook-napi 运行时加载器
+  - "package.json"
+  # 剔除非 Windows 平台的 prebuild（瘦身；win32-x64/arm64 保留）
+  - "!node_modules/uiohook-napi/prebuilds/darwin*"
+  - "!node_modules/uiohook-napi/prebuilds/linux*"
+
+asar: false
+
+# uiohook-napi 为 prebuildify 预编译的 N-API .node（跨 Node/Electron ABI 稳定，
+# `electron .` 可直接加载）→ 无需 @electron/rebuild 重编译，否则打包机会强制要求 Visual Studio。
+npmRebuild: false
+
+win:
+  target:
+    - portable
+    - nsis
+  icon: build/icon.png  # 应用/exe/安装/快捷图标：官方 idle/01 帧（非伪造，复用现有 IP 美术）；electron-builder 由 256px PNG 生成 icon.ico
+
+portable:
+  artifactName: "${productName}-Portable-${version}.${ext}"
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  artifactName: "${productName}-Setup-${version}.${ext}"

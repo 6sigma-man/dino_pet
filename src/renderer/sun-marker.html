@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 纯装饰标记窗：禁远程、禁脚本，仅内联 CSS 动画（TECH_DESIGN §24） -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'unsafe-inline'; img-src 'self' data:"
+    />
+    <title>DinoPet 目标</title>
+    <style>
+      /* 全屏透明：主进程把本窗居中落在目标点上，这里只画一个会消失的“小太阳”。 */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      #sun {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        width: 48px;
+        height: 48px;
+        transform: translate(-50%, -50%);
+        animation: pop 1100ms cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+      }
+      /* 光芒：旋转的锥形重复渐变，径向 mask 只留一圈环带 */
+      #sun .rays {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: repeating-conic-gradient(
+          from 0deg,
+          rgba(255, 210, 63, 0.95) 0deg 6deg,
+          transparent 6deg 30deg
+        );
+        -webkit-mask: radial-gradient(circle, transparent 0 16px, #000 16px 25px, transparent 25px);
+        mask: radial-gradient(circle, transparent 0 16px, #000 16px 25px, transparent 25px);
+        animation: spin 3s linear infinite;
+      }
+      /* 太阳本体 */
+      #sun .core {
+        position: absolute;
+        inset: 13px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 50% 45%, #fff3b0 0%, #ffd23f 46%, #ff9e2c 100%);
+        box-shadow: 0 0 12px 4px rgba(255, 196, 64, 0.85), 0 0 26px 10px rgba(255, 158, 44, 0.4);
+      }
+      /* 精确落点白点（窗口中心 = 目标坐标） */
+      #sun .dot {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        box-shadow: 0 0 6px 2px rgba(255, 210, 63, 0.9);
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      /* 出现（弹入）→ 停留 → 淡出消失 */
+      @keyframes pop {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.2);
+        }
+        18% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1.12);
+        }
+        30% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        74% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(1.05);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="sun">
+      <div class="rays"></div>
+      <div class="core"></div>
+      <div class="dot"></div>
+    </div>
+  </body>
+</html>
