@@ -30,8 +30,8 @@ You can download DinoPet-Portable-1.2.0.exe in release package to directly execu
 
 
 ```bash
-git clone https://github.com/<your-username>/DinoPet.git
-cd DinoPet
+git clone https://github.com/6sigma-man/dino_pet.git
+cd dino_pet
 npm ci
 npm start
 ```
