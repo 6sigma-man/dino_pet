@@ -5,7 +5,8 @@ node_modules/
 dist/
 dist-unittest/
 out/
-release/
+# 发布产物：便携/安装 exe 经 Git LFS 入库（见 .gitattributes），但排除可由 exe 还原的冗余解包目录
+release/win-unpacked/
 
 # Electron / packaging
 *.asar
