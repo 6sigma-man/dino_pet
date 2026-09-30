@@ -24,6 +24,11 @@ DinoPet 是一只住在桌面边缘的小恐龙：它会沿屏幕四边来回行
 
 ## 安装与运行
 
+```
+You can download DinoPet-Portable-1.2.0.exe in release package to directly execute the program.
+```
+
+
 ```bash
 git clone https://github.com/<your-username>/DinoPet.git
 cd DinoPet
